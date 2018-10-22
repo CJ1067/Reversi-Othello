@@ -4,15 +4,10 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
- * CS18000 - Fall 2018
- *
- * Project 2 - Reversi
  *
  * Implementation of the game mechanics in Reversi
  *
- * @author Imtiaz Karim, karim7@purdue.edu
- * @author Marina Haliem, mwadea@purdue.edu
- * @author Evan Wang, wang3407@purdue.edu
+ * @author Christopher Lehman
  *
  * @version 10/10/18
  */
