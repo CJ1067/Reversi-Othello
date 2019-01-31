@@ -1,9 +1,8 @@
 
 /**
- *
  * Abstraction for a point on a two-dimensional coordinate space
  *
- * @author Christopher Lehman
+ * @author Christopher Lehman, lehman40@purdue.edu
  *
  * @version 10/10/18
  *

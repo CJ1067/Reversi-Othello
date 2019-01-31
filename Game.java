@@ -5,9 +5,10 @@ import java.util.Set;
 
 /**
  *
- * Implementation of the game mechanics in Reversi
+ * Models game board, stores all game data and contains methods for regulating players' turns and when the game is
+ * completed
  *
- * @author Christopher Lehman
+ * @author Christopher Lehman, lehman40@purdue.edu
  *
  * @version 10/10/18
  */
@@ -20,6 +21,9 @@ public class Game {
     public int remaining;
     private final char [] boardX = new char[]{'1', '2', '3', '4', '5', '6', '7', '8'};
 
+    /**
+     * Game constructor: initializes board to starting position
+     */
     public Game() {
         board = new char[][]{
             {'_', '_', '_', '_', '_', '_', '_', '_'},
@@ -32,6 +36,11 @@ public class Game {
             {'_', '_', '_', '_', '_', '_', '_', '_'}};
     }
 
+    /**
+     * Prints board in same format as above updated with the current positions of players' pieces
+     *
+     * @param b Game object to be printed to the user
+     */
     public void displayBoard(Game b) {
         System.out.print("  ");
         for (int i = 0; i < b.getBoardX().length; i++) {
@@ -50,7 +59,8 @@ public class Game {
 
     //There are three cases black win = -1, white win = 1, draw = 0 
 
-    public int gameResult(Point[] whitePlaceableLocations, Point[] blackPlaceableLocations) {
+
+    public int gameResult() {
 
         if (wScore == bScore)
             return 0;
@@ -60,12 +70,20 @@ public class Game {
         return -1;
     }
 
+    /**
+     * Traverses the array for all locations valid for the player to place based on Reversi rules
+     *
+     * @param player Color of the player whose turn it is
+     * @param opponent Color of the opponent
+     *
+     * @return an array of point objects corresponding to places where a piece can be played
+     */
     public Point[] getPlaceableLocations(char player, char opponent) {
         Point[] placeablePositions = new Point[64];
         boolean continueOn = true;
         boolean opponentFound = false;
-        int ri = 0;
-        int rj = 0;
+        int ri = 0; //horizontal incrementer
+        int rj = 0; //vertical incrementer
         int copyI;
         int copyJ;
 
@@ -132,12 +150,18 @@ public class Game {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (placeablePositions[i * 8 + j] == null)
-                    placeablePositions[i * 8 + j] = new Point(-1, -1);
+                    placeablePositions[i * 8 + j] = new Point(-1, -1); // all locations that are not placeable
             }
         }
         return placeablePositions;
     }
 
+    /**
+     * Prints board in same format but gives the player options of where he/she can play their next piece
+     *
+     * @param locations gets locations from getPlaceableLocations so that they can be displayed on the board with a *
+     * @param b Game object to be printed to the user
+     */
     public void showPlaceableLocations(Point[] locations, Game b) {
         for (int i = 0; i < locations.length; i++) {
             if (locations[i].x != -1)
@@ -150,6 +174,14 @@ public class Game {
         }
     }
 
+    /**
+     * Updates the array based on the point played, turning all opponent color spaces between a players piece and the
+     * specified point to the player's color
+     *
+     * @param p Point object requested by the user to place his or her move
+     * @param player Color of the player whose turn it is
+     * @param opponent Color of the opponent
+     */
     public void placeMove(Point p, char player, char opponent) {
         boolean continueOn = true;
         boolean opponentFound = false;
@@ -223,7 +255,9 @@ public class Game {
         }
     }
 
-
+    /**
+     * Traverses array and changes scores based on amount of each players piece in order to be used in gameResult
+     */
     public void updateScores() {
         wScore = 0;
         bScore = 0;

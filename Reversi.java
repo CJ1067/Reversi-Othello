@@ -2,15 +2,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * CS18000 - Fall 2018
+ * Runs operations to carry out a full game including the main method. Sequences through players' turns and gives a
+ * report after the game as well as an option to play again
  *
- * Project 2 - Reversi
- *
- * Abstraction of and launcher for a Reversi game
- *
- * @author Imtiaz Karim, karim7@purdue.edu
- * @author Marina Haliem, mwadea@purdue.edu
- * @author Evan Wang, wang3407@purdue.edu
+ * @author Christopher Lehman, lehman40@purdue.edu
  *
  * @version 10/10/18
  */
@@ -150,16 +145,13 @@ public class Reversi {
                 System.out.println("White: " + g.wScore + " Black: " + g.bScore);
             }
         }
-        if (g.gameResult(g.getPlaceableLocations('W', 'B'),
-                g.getPlaceableLocations('W', 'B')) == 0) {
+        if (g.gameResult() == 0) {
             System.out.println(draw);
         }
-        if (g.gameResult(g.getPlaceableLocations('W', 'B'),
-                g.getPlaceableLocations('W', 'B')) == -1) {
+        if (g.gameResult() == -1) {
             System.out.println("Black wins: " + g.bScore + ":" + g.wScore);
         }
-        if (g.gameResult(g.getPlaceableLocations('W', 'B'),
-                g.getPlaceableLocations('W', 'B')) == 1) {
+        if (g.gameResult() == 1) {
             System.out.println("White wins: " + g.wScore + ":" + g.bScore);
         }
     }
